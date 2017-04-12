@@ -41,8 +41,11 @@ Q3ii. After merging the GDP and education datasets by on country code, 189 of th
 ```{r Q3ii }
 #SUMMARIZE THE COMMENT IN SENTENCE FORM LATER
 
+#Subset for dates past 1/1/1900
+Temp_clean1900 <- Temp_clean[which(Temp_clean$Date >= "1900-01-01"), ]
+
 #Subset only US Data, call the output table UStemp. Should have 1365 rows
-UStemp<-TEMPSubset[grep("United States", TEMPSubset$Country), ]
+UStemp<-Temp_clean1900[grep("United States", Temp_clean1900$Country), ]
 
 #Rename the existing temp column include units (degrees C)
 UStemp<-dplyr::rename(UStemp, Monthly.AverageTemp.degC=Monthly.AverageTemp)

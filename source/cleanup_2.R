@@ -1,6 +1,6 @@
 # separate two differnt date formats
-Temp1 <- TEMP[which(grepl('\\/',Temp$Date) == TRUE), ]
-Temp2 <- TEMP[which(grepl('\\-',Temp$Date) == TRUE), ]
+Temp1 <- TEMP[which(grepl('\\/',TEMP$Date) == TRUE), ]
+Temp2 <- TEMP[which(grepl('\\-',TEMP$Date) == TRUE), ]
 
 # convert each date format into a date type
 Temp1$Date2 <- as.Date(Temp1$Date, "%m/%d/%Y")
