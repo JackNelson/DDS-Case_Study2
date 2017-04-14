@@ -8,11 +8,10 @@ Code used to download, tidy and merge the data
 
 ``` r
 dir<-getwd()
-#download the TEMP temp file and assign it to dataset name TEMPSubset
+#download the TEMP temp file and assign it to dataset name Temp_clean
 source(paste(dir,"/source/download_2.R",sep=""))
 #cleanup the data-turn the dates from strings to dates
 source(paste(dir,"/source/cleanup_2.R",sep=""))
-#source(paste(dir,"/source/merge_ED_GDP.R",sep=""))
 ```
 
 reformatting to generate top 20 temp diff between min and max (include more detail later)
@@ -67,26 +66,47 @@ T20MinMaxTemp2$Min.Max <- substr(T20MinMaxTemp2$Min.Max, 0, 3)
 names(T20MinMaxTemp1)[names(T20MinMaxTemp1) == 'Min.Date'] <- 'Date'
 names(T20MinMaxTemp2)[names(T20MinMaxTemp2) == 'Max.Date'] <- 'Date'
 
-# union 2 subsets together for one long formatted T20 dataframe
+# union 2 subsets together for one long formatted T20MinMaxTemp dataframe
 T20MinMaxTempLong <- union(T20MinMaxTemp1, T20MinMaxTemp2)
 
-# reorder to group by country and put two dates in order for plotting
+# reorder to group by Country and put two dates in order for plotting
 T20MinMaxTempLong <- T20MinMaxTempLong[order(T20MinMaxTempLong$TempDiff,T20MinMaxTempLong$Date), ]
+
+# reorder Country in descending order according to TempDiff
+T20MinMaxTempLong <- transform(T20MinMaxTempLong, Country=reorder(Country, -TempDiff) )
 ```
 
-plotting minmax point on chart by country, labeling points with year, and arrow indicating an increase or decrease (to order x axis by tempdiff, add title, and recolor)
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+plotting minmax points on chart by country, labeling points with year, ranking x axis by TempDiff, and arrow indicating if Min/Max occurred first
+-------------------------------------------------------------------------------------------------------------------------------------------------
 
 ``` r
 # plotting T20MinMaxTempLong
 ggplot(T20MinMaxTempLong, aes(x=Country, y=Monthly.AvgTemp, 
-    color=Min.Max, group=Country, factor(TempDiff))) + 
-  geom_point(size=1)+geom_path(arrow=arrow()) + 
-  theme(axis.text.x = element_text(angle = -90, hjust = 0, vjust = 0)) + 
-  geom_text(aes(label=format(Date,'%Y'), hjust='inward', vjust='outward'), size = 2)
+    group=Country, factor(TempDiff))) + 
+  geom_point(size=2)+geom_path(arrow=arrow()) +
+  labs(y = 'Monthly Average Temperature (Celcius)',
+      title = 'Minimum & Maximum Monthly Average Temperature by Country 
+      (Since 1900)') +
+  theme(axis.text.x = element_text(angle = -90, hjust = 0, vjust = 0.5),
+        plot.title = element_text(size=10, face='bold', hjust=0.5)) + 
+  geom_text(data = filter_(T20MinMaxTempLong, ~Min.Max == 'Min'), 
+            aes(label=format(Date,'%Y'), hjust=0.5, vjust=1.5), size = 3) +
+  geom_text(data = filter_(T20MinMaxTempLong, ~Min.Max == 'Max'), 
+            aes(label=format(Date,'%Y'), hjust=0.5, vjust=-0.5), size =3)
 ```
 
 ![](CaseStudy2_Q3i_files/figure-markdown_github/T20plot-1.png)
 
-maybe add simple scatter plot with year in x axis to show time gaps between minmax
-----------------------------------------------------------------------------------
+scatter plot with year in x axis to show time gaps between minmax
+-----------------------------------------------------------------
+
+``` r
+ggplot(T20MinMaxTempLong, aes(x=Date, y=Monthly.AvgTemp, color=Min.Max)) + 
+  geom_point(size=2) +
+  labs(x = 'Year', y = 'Monthly Avgerage Temperature (Celcius)', 
+      title = 'Minimum & Maximum Monthly Average Temperature vs. Year (Since 1900)',
+      color = "") +
+  theme(plot.title = element_text(size=12, face='bold', hjust=0.5))
+```
+
+![](CaseStudy2_Q3i_files/figure-markdown_github/T20scatterplot-1.png)
