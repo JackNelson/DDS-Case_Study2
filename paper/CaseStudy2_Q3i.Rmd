@@ -22,7 +22,7 @@ library(stats)
 library(reshape2)
 ```
 
-## Code used to download, tidy and merge the data
+#### Code used to download and tidy data
 ```{r download_tidy_merge}
 dir<-getwd()
 #download the TEMP temp file and assign it to dataset name Temp_clean
@@ -31,7 +31,28 @@ source(paste(dir,"/source/download_2.R",sep=""))
 source(paste(dir,"/source/cleanup_2.R",sep=""))
 ```
 
-## reformatting to generate top 20 temp diff between min and max (include more detail later)
+### 3i. Find the difference between the maximum and the minimum monthly average temperatures for each country and report/visualize top 20 countries with the maximum differences for the period since 1900.
+
+#### The following code chunk takes the Temp_clean data frame and returns T20MinMaxTemp, the top 20 countries with the greatest temperature difference between their minimum and maximum Monthly.AvgTemp observations since 1/1/1900.
+
+##### The variables contained in T20MinMaxTemp are as follows:
+* Country
+* Min.Monthly.AvgTemp
+* Min.Date
+* Max.Monthly.AvgTemp
+* Max.Date
+* TempDiff
+
+##### The steps taken to obtain T20MinMaxTemp are as follows:
+* Subset Temp_clean to take only observations since 1/1/1900
+* Aggregate Temp_clean1900 to receive minimum Monthly.AverageTemp
+* Merge the minimum Monthly.AverageTemp value back with its Temp_clean1900 observation
+* Repeat the previous two steps for maximum Monthly.AverageTemp
+* Merge minimum and maximum subsets into single data frame
+* Take only needed vectors for T20MinMaxTemp and rename vectors
+* Calculate TempDiff
+* Reorder data frame in descending order by TempDiff
+* Subset to take only first 20 observations
 
 ```{r T20df}
 # taking observations since 1900
@@ -64,7 +85,23 @@ MinMaxTemp <- MinMaxTemp[order(-MinMaxTemp$TempDiff), ]
 T20MinMaxTemp <- MinMaxTemp[1:20, ]
 ```
 
-## reformatting to put top 20 data frame in long format (include more detail later)
+#### The following code chunk takes the T20MinMaxTemp data frame and returns T20MinMaxTempLong, the long format of T20MinMaxTemp needed for plotting.
+
+##### The variables contained in T20MinMaxTempLong are as follows:
+* Country
+* Date
+* TempDiff
+* Min.Max
+* Monthly.AvgTemp
+
+##### The steps taken to obtain T20MinMaxTempLong are as follows:
+* Converting Monthly.AvgTemp into long format for only minimum values
+* Taking only the first 3 characters needed for the Min.Max indicator variable
+* Repeat the previous two steps for maximum Monthly.AvgTemp values
+* Renaming Min.Date and Max.Date in subsets to a common variable name Date
+* Unioning both subsets together to get one long formatted data frame
+* Reorder T20MinMaxTempLong to group values by Country ranked by Date
+* Transform Country order to be ranked by TempDiff for plotting
 
 ```{r T20dflong}
 # putting minimum metrics in long format from T20MinMaxTemp
@@ -91,10 +128,9 @@ T20MinMaxTempLong <- T20MinMaxTempLong[order(T20MinMaxTempLong$TempDiff,T20MinMa
 T20MinMaxTempLong <- transform(T20MinMaxTempLong, Country=reorder(Country, -TempDiff) )
 ```
 
-## plotting minmax points on chart by country, labeling points with year, ranking x axis by TempDiff, and arrow indicating if Min/Max occurred first 
+#### The following code chunk plots the T20MinMaxTemp data frame with Country in the x axis ranked by TempDiff and Monthly.AvgTemp in the y axis.  The Min and Max values are plotting with labels indicating the year the observation occurred.  An arrow then indicates which observation occurred first (Min prior to Max = Up; Max prior to Min = Down) 
 
 ```{r T20plot}
-# plotting T20MinMaxTempLong
 ggplot(T20MinMaxTempLong, aes(x=Country, y=Monthly.AvgTemp, 
     group=Country, factor(TempDiff))) + 
   geom_point(size=2)+geom_path(arrow=arrow()) +
@@ -109,7 +145,8 @@ ggplot(T20MinMaxTempLong, aes(x=Country, y=Monthly.AvgTemp,
             aes(label=format(Date,'%Y'), hjust=0.5, vjust=-0.5), size =3)
 ```
 
-## scatter plot with year in x axis to show time gaps between minmax
+#### The following code chunk plots the T20MinMaxTemp data frame with Year in the x axis and Monthly.AvgTemp in the y axis.  The Min and Max Monthly.AvgTemp values are plotted by color.
+
 
 ```{r T20scatterplot}
 ggplot(T20MinMaxTempLong, aes(x=Date, y=Monthly.AvgTemp, color=Min.Max)) + 
