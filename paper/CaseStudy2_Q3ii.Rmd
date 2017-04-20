@@ -22,7 +22,7 @@ library(gdata)
 
 ## Introduction
 
-NEEDS EDIT--In this study, we will examine the Gross Domestic Product (GDP) rankings for countries across the world and analyze the relationship between GDP and income groups. We will order the countries by GDP and evaluate the average GDP ranking for different income groups, visualize the GDP data for all countries by income group, and examine the relationship between income group and GDP. The analysis will utilize GDP and income group from the data-catalog at the world bank web site.
+In this study, we will examine questions related to 
 
 
 ## Code used to download, tidy and merge the data
@@ -37,36 +37,36 @@ source(paste(dir,"/source/cleanup_2.R",sep=""))
 
 ## Analysis Results
 
-Q3ii. After merging the GDP and education datasets by on country code, 189 of the IDs match between the two datasets, as shown in the structure of the dataframe below. The data frame has 189 rows after merging education data and excluding N/A values.
-```{r Q3ii }
-#SUMMARIZE THE COMMENT IN SENTENCE FORM LATER
+Q3ii.a. Using the data from 1900 to 2013 for average land temperatures only in the United States, we can convert the temperatures from degrees C to degrees F using the formula Temp (deg F) = Temp (deg C)* 1.8 +32.
+```{r Q3iia }
+#The following code chunk will keep only the data since 1900, subset only the data from the United States, rename the temperature column in the existing dataset to be explicitly in degrees C. It will then add a column with the temperature data converted to degrees C and display the first few rows of the resulting table.
 
-#Subset for dates past 1/1/1900
+
 Temp_clean1900 <- Temp_clean[which(Temp_clean$Date >= "1900-01-01"), ]
-
-#Subset only US Data, call the output table UStemp. Should have 1365 rows
 UStemp<-Temp_clean1900[grep("United States", Temp_clean1900$Country), ]
-
-#Rename the existing temp column include units (degrees C)
 UStemp<-dplyr::rename(UStemp, Monthly.AverageTemp.degC=Monthly.AverageTemp)
-
-#Add a new column converting from Celcius to Farenheight
 UStemp$Monthly.AverageTemp.degF<-(UStemp$Monthly.AverageTemp.degC*1.8)+32
+head(UStemp)
+```
+Q3ii.b. Calculating the average land temperature by Year and plotting it, we see a general trend up in average land temperatures in the United States between 1900 and 2013. 
 
-#Add a column of just year
-UStemp$Year <- getYear(UStemp$Date)
+```{r Q3iib }
+#The following code chunk will take the year portion of each month, summarize the temperature data in degrees F by year, and then plot the Temperature data by year.
 
-#summarize the temperature by year, in degrees F
+UStemp$Year<-as.POSIXlt(UStemp$Date)$year+1900
 UStempYear<-ddply(UStemp,~Year,summarise,Temp.mean.degF=mean(Monthly.AverageTemp.degF))
-
-#plot the temperature by year, in degrees F
-
-#calculate the 1 year deltas (ie 1991-1990,1992-1991), take the absolute value, and then report the max value and the years
-UStempYear$UStempYear.delta <- abs(UStempYear$Temp.mean.degF -lag(UStempYear$Temp.mean.degF))
-UStempYear[which(UStempYear$UStempYear.delta == max(UStempYear$UStempYear.delta, na.rm=TRUE)), ]
-
+ggplot(UStempYear, aes(x = Year, y=Temp.mean.degF))+geom_point()+geom_smooth()+labs(y="Average Land Temp (deg F)")+labs(title = "Average Land Temperature by Year in United States")+geom_line()+scale_x_continuous(breaks=seq(1900,2015,5))+theme(axis.text.x = element_text(size=10, angle=90))+scale_y_continuous(breaks=seq(40,56,1))
 ```
 
+
+Q3ii.c.  Calculating the one year difference of average land temperature by year, we find that the maximum absolute temperature difference is 2.5401 degrees F, and occurred between 1920 and 1921.
+```{r Q3iic }
+#The code chunk below will first sort the data, by year, in ascending order. Then, it will calculate the 1 year deltas (ie 1991-1990,1992-1991), take the absolute value, and then report the max value and the years and the corresponding 2 years. 
+UStempYear_sorta<-arrange(UStempYear,Year)
+UStempYear_sorta$UStempYear.delta.degF <- abs(UStempYear_sorta$Temp.mean.degF -lag(UStempYear_sorta$Temp.mean.degF))
+UStempYear_sorta$Year_lab<-paste(lag(UStempYear_sorta$Year),"-",UStempYear_sorta$Year)
+UStempYear_sorta[which(UStempYear_sorta$UStempYear.delta == max(UStempYear_sorta$UStempYear.delta, na.rm=TRUE)), ]
+```
 
 
 ## Conclusion
