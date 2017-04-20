@@ -1,6 +1,6 @@
 # TITLE
 
-TODO
+Orange Trees and Land Temperature Data
 
 Contributors: Georges Michel, Jack Nelson, Nicole Shaver, Nathan Tuttle
 
@@ -13,14 +13,16 @@ This project was generated for Southern Methodist University course MSDS 6306
 Doing Data Science: An Introduction to Data Science to complete Case Study 1
 
 *Datasets sources*
-Orange and CityTemp
-TODO
+
+Orange: Built in R data set
+
+CityTemp: Provided by instructor
 
 # FILE ORGANIZATION
 
 ____ <- signifies a folder (i.e. data <- = data folder)
 
-"|" separates multiple files in the same folder (i.e. TODO) 
+"|" separates multiple files in the same folder (i.e. file1 | file2) 
 
 The original file structure is as follows:
 
@@ -28,11 +30,11 @@ The original file structure is as follows:
 
   + Makefile.txt
 
-  + data <-CityTemp.csv,TEMP.csv
+  + data <- CityTemp.csv | TEMP.csv
 
-  + paper <- CaseStudy2_Q3i.Rmd, CaseStudy2_Q3i.md, CaseStudy2_Q3ii.Rmd,CaseStudy2_Q3ii.md, Case Study 2.docx
+  + paper <- CaseStudy2_Q3i.Rmd | CaseStudy2_Q3i.md | CaseStudy2_Q3ii.Rmd | CaseStudy2_Q3ii.md | Case Study 2.docx
 
-  + source <- CityTemp_cleanup.R, cleanup_2.R, download_2.R
+  + source <- CityTemp_cleanup.R | cleanup_2.R | download_2.R
 
 *After running the Makefile in the command line...*
 
@@ -42,14 +44,14 @@ The file structure should be as follows:
   
   + Makefile.txt
   
-  + data <- CityTemp.csv,TEMP.csv
+  + data <- CityTemp.csv | TEMP.csv
   
-  + paper <- CaseStudy2_Q3i.Rmd, CaseStudy2_Q3i.md, CaseStudy2_Q3ii.Rmd,CaseStudy2_Q3ii.md
+  + paper <- CaseStudy2_Q3i.Rmd | CaseStudy2_Q3i.md | CaseStudy2_Q3ii.Rmd | CaseStudy2_Q3ii.md | Case Study 2.docx
              
-    + TODO : Investigate how make will lay out final structure.
-    | TODO
+    + CaseStudy2_Q3i_files 
+    | Is this neccessary
   
-  + source <- CityTemp_cleanup.R, cleanup_2.R, download_2.R
+  + source <- CityTemp_cleanup.R | cleanup_2.R | download_2.R
 
 # FILE INFO
 
@@ -59,11 +61,37 @@ README.md
 
  Makefile.txt
  
-  + Text file to run in the command line to populate TODO
+  + Builds Case Study 2 markdown
 	
-TODO: Explain the rest of the variables
+TEMP.csv
+  
+  + Data for country trees
 
-	
+CityTemp.csv
+
+  + Data for city trees
+
+CaseStudy2_Q3i.Rmd
+
+  + Question 1 R markdown file that generates the analysis and conclusion for the case study
+
+CaseStudy2_Q3ii.Rmd
+
+  + Question 2 + R markdown file that generates the analysis and conclusion for the case study
+
+CityTemp_cleanup.R  
+
+  + R code file that cleans the City Temp data
+  
+cleanup_2.R  
+  
+  + R code file that downloads the GDP.csv and EDDATA.csv from the internet
+
+download_2.R
+
+  + R code file that downloads the GDP.csv and EDDATA.csv from the internet
+
+
 _Unused variables:_
 TODO find all variables and list the ones not used
 
@@ -77,20 +105,22 @@ should be populated in the project's paper folder.
 
 # SESSIONINFO()
 
-R version 3.3.2 (2016-10-31)
-Platform: x86_64-apple-darwin13.4.0 (64-bit)
-Running under: macOS Sierra 10.12
+R version 3.3.3 (2017-03-06)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 16.04.2 LTS
 
 locale:
-[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C               LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8     LC_MONETARY=en_US.UTF-8   
+ [6] LC_MESSAGES=en_US.UTF-8    LC_PAPER=en_US.UTF-8       LC_NAME=C                  LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 
 attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods  
-[7] base     
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] reshape2_1.4.2 gdata_2.17.0   ggplot2_2.2.1  dplyr_0.5.0    plyr_1.8.4    
 
 loaded via a namespace (and not attached):
- [1] backports_1.0.4 magrittr_1.5    rprojroot_1.1 
- htmltools_0.3.5
- [5] tools_3.3.2     yaml_2.1.14     Rcpp_0.12.8     stringi_1.1.2
- [9] rmarkdown_1.3   knitr_1.15.1    stringr_1.2.0   digest_0.6.11
-[13] evaluate_0.10  
+ [1] Rcpp_0.12.10     knitr_1.15.1     magrittr_1.5     munsell_0.4.3    colorspace_1.3-2 R6_2.2.0         stringr_1.2.0    tools_3.3.3      grid_3.3.3      
+[10] gtable_0.2.0     DBI_0.6-1        htmltools_0.3.5  gtools_3.5.0     yaml_2.1.14      lazyeval_0.2.0   assertthat_0.2.0 rprojroot_1.2    digest_0.6.12   
+[19] tibble_1.3.0     evaluate_0.10    rmarkdown_1.4    stringi_1.1.5    scales_0.4.1     backports_1.0.5 
