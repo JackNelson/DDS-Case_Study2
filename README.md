@@ -90,10 +90,62 @@ cleanup_2.R
 download_2.R
 
   + R code file that downloads the GDP.csv and EDDATA.csv from the internet
+  
+# DATA INFO
+
+*TEMP.csv*
+
+_Variables used for study:_
+
+Date
+
+  + Date in Year-Month-Day or Month/Day/Year format (char)
+MonthlyAverageTemp
+
+  + The monthly average land temperature, in degrees Celsius(num)
+Country
+
+  + The name of the country (char)
+
+_Unused variables:_
+
+MonthlyAverageTempUncertainty
+
+  + Uncertainty in monthly average land temperature, in degrees Celsius (num)
+
+*CityTemp.csv*
+
+_Variables used for study and their description:_
+
+Date
+
+  + Date in Year-Month-Day or Month/Day/Year format (char)
+MonthlyAverageTemp
+
+  + The monthly average land temperature, in degrees Celsius(num)
+
+City
+
+  + The name of the city (char)
+
+Country
+
+  + The name of the country (char)
 
 
 _Unused variables:_
-TODO find all variables and list the ones not used
+
+MonthlyAverageTempUncertainty
+
+  + Uncertainty in monthly average land temperature, in degrees Celsius (num)
+
+Latitude
+
+  + Latitude, in degrees north or south of the equator (char)
+
+Longitude
+
+  + Longitude, in degrees east of west of the meridian (char)
 
 # HOW TO REPRODUCE RESEARCH
 
