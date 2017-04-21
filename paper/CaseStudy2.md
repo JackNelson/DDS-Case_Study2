@@ -166,19 +166,19 @@ head(UStemp)
 ```
 
     ##        Monthly.AverageTemp.degC Monthly.AverageTemp.Uncertainty
-    ## 110179                   -1.702                           0.206
-    ## 113579                    8.534                           0.103
-    ## 116877                    9.848                           0.201
-    ## 117023                   -2.286                           0.154
-    ## 117867                   21.690                           0.110
-    ## 118212                    2.504                           0.186
+    ## 110207                   -1.702                           0.206
+    ## 113557                    8.534                           0.103
+    ## 116909                    9.848                           0.201
+    ## 117050                   -2.286                           0.154
+    ## 117915                   21.690                           0.110
+    ## 118266                    2.504                           0.186
     ##              Country       Date Monthly.AverageTemp.degF
-    ## 110179 United States 1934-12-01                  28.9364
-    ## 113579 United States 2009-10-01                  47.3612
-    ## 116877 United States 1933-10-01                  49.7264
-    ## 117023 United States 1972-02-01                  27.8852
-    ## 117867 United States 2008-07-01                  71.0420
-    ## 118212 United States 1986-11-01                  36.5072
+    ## 110207 United States 1934-12-01                  28.9364
+    ## 113557 United States 2009-10-01                  47.3612
+    ## 116909 United States 1933-10-01                  49.7264
+    ## 117050 United States 1972-02-01                  27.8852
+    ## 117915 United States 2008-07-01                  71.0420
+    ## 118266 United States 1986-11-01                  36.5072
 
 ### Q3ii.b. Calculate average land temperature by year and plot it. The original file has the average land temperature by month.
 
