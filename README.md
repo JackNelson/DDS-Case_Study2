@@ -5,7 +5,7 @@ Orange Trees and Land Temperature Data
 Contributors: Georges Michel, Jack Nelson, Nicole Shaver, Nathan Tuttle
 
 # PURPOSE OF PROJECT
-
+Examine Orange tree growth against age. And temperature comparisons in city and country...
 
 # COPYRIGHT INFO
 
@@ -32,7 +32,7 @@ The original file structure is as follows:
 
   + data <- CityTemp.csv | TEMP.csv
 
-  + paper <- CaseStudy2_Q3i.Rmd | CaseStudy2_Q3i.md | CaseStudy2_Q3ii.Rmd | CaseStudy2_Q3ii.md | Case Study 2.docx
+  + paper <- CaseStudy2.Rmd | Case Study 2.docx
 
   + source <- CityTemp_cleanup.R | cleanup_2.R | download_2.R
 
@@ -46,10 +46,9 @@ The file structure should be as follows:
   
   + data <- CityTemp.csv | TEMP.csv
   
-  + paper <- CaseStudy2_Q3i.Rmd | CaseStudy2_Q3i.md | CaseStudy2_Q3ii.Rmd | CaseStudy2_Q3ii.md | Case Study 2.docx
+  + paper <- CaseStudy2.Rmd | Case Study 2.docx
              
-    + CaseStudy2_Q3i_files 
-    | Is this neccessary
+    + CaseStudy2_files 
   
   + source <- CityTemp_cleanup.R | cleanup_2.R | download_2.R
 
@@ -63,6 +62,10 @@ README.md
  
   + Builds Case Study 2 markdown
 	
+Orange
+
+  + Data for Orange trees
+
 TEMP.csv
   
   + Data for country trees
@@ -133,7 +136,23 @@ Country
   + The name of the country (char)
 
 
+*Orange*
+
+_Variables used for study:_
+
 _Unused variables:_
+
+Tree
+  
+  + Type of tree
+
+age
+
+  + Age of tree days since 1968/12/31
+  
+circumference
+
+  + Circumference of tree in mm
 
 MonthlyAverageTempUncertainty
 

@@ -20,12 +20,52 @@ library(ggplot2)
 library(gdata)
 library(stats)
 library(reshape2)
+library(graphics)
 ```
 
 ### Introduction
 In this study....
 
+```{r Orange, echo=FALSE}
+
+summary(Orange)
+
+Circum <- Orange$circumference
+
+Orange_Mean <- mean(Circum)
+
+Orange_Median <- median(Circum)
+
+Orange_Trees <- Orange$Tree
+```
+```{r Mean, echo=TRUE}
+Orange_Mean
+```
+```{r Median, echo=TRUE}
+Orange_Median
+
+```
+
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(Orange$circumference~Orange$age,
+     pch=c(1,2,3,4,5)[Orange$Tree],
+     col=c("blue","red","green","maroon","purple")[Orange$Tree])
+legend("topleft",c("Tree 1", "Tree 2", "Tree 3", "Tree 4", "Tree 5"),
+       pch=c(1,2,3,4,5),col=c("blue","red","green","maroon","purple"))
+
+
+boxplot(Circum~Orange_Trees,data=Orange, main="Orange Tree Circumference Growth against Age", 
+        xlab="Tree", ylab="Circumference", pch=c(1,2,3,4,5)[Orange$Tree],col=c("blue","red","green","maroon","purple"))
+
+```
+
 #### Code used to download and tidy data
+
 ```{r download_tidy_merge}
 dir<-getwd()
 #download the TEMP temp file and assign it to dataset name Temp_clean
