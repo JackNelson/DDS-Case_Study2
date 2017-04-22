@@ -5,7 +5,8 @@ Orange Trees and Land Temperature Data
 Contributors: Georges Michel, Jack Nelson, Nicole Shaver, Nathan Tuttle
 
 # PURPOSE OF PROJECT
-Examine Orange tree growth against age. Compare temperature in city and country...
+
+In this study we examine the relationship between orange tree size and circumference. We will also look at land size temperature across the United States compared to the world looking for short term and long term trends.
 
 # COPYRIGHT INFO
 
@@ -135,25 +136,6 @@ Country
 
   + The name of the country (char)
 
-
-*Orange*
-
-_Variables used for study:_
-
-_Unused variables:_
-
-Tree
-  
-  + Type of tree
-
-age
-
-  + Age of tree days since 1968/12/31
-  
-circumference
-
-  + Circumference of tree in mm
-
 MonthlyAverageTempUncertainty
 
   + Uncertainty in monthly average land temperature, in degrees Celsius (num)
@@ -165,6 +147,30 @@ Latitude
 Longitude
 
   + Longitude, in degrees east of west of the meridian (char)
+
+_Unused variables:_
+
+  
+*Orange*
+
+_Variables used for study:_
+
+Tree
+  
+Used from R help.
+  + An ordered factor indicating the tree on which the measurement is made. The ordering is according to increasing maximum diameter.
+
+age
+
+Used from R help.
+  + A numeric vector giving the age of the tree (days since 1968/12/31)
+  
+circumference
+
+Used from R help.
+  + A numeric vector of trunk circumferences (mm). This is probably "circumference at breast height", a standard measurement in forestry.
+
+_Unused variables:_
 
 # HOW TO REPRODUCE RESEARCH
 
