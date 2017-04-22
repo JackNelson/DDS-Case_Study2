@@ -28,7 +28,7 @@ source(paste(dir,"/source/CityTemp_cleanup.R",sep=""))
     ##  4:7   3rd Qu.:1372.0   3rd Qu.:161.5  
     ##        Max.   :1582.0   Max.   :214.0
 
-The mean circumference of the Orange trees is 115.8571 centimeters trunk circumference.
+##### The mean circumference of the Orange trees is 115.8571 centimeters trunk circumference.
 
 ``` r
 Orange_Mean
@@ -36,7 +36,7 @@ Orange_Mean
 
     ## [1] 115.8571
 
-The median circumference of the Orange trees is 115 centimeters.
+##### The median circumference of the Orange trees is 115 centimeters.
 
 ``` r
 Orange_Median
@@ -47,7 +47,13 @@ Orange_Median
 Orange Tree Circumference against Age
 -------------------------------------
 
-Here we show as the tree gets older it gets wider but none gets bigger then Tree 5 and none is smaller then Tree 1. ![](CaseStudy2_files/figure-markdown_github/pressure-1.png)![](CaseStudy2_files/figure-markdown_github/pressure-2.png) In the preceding 2 plots we see that Tree 3 is the smallest and Tree 4 is the largest.
+![](CaseStudy2_files/figure-markdown_github/Orange%20Circumference%20Against%20Age-1.png)
+
+#### At some point in the lifecycle of Tree group five (the highest maximum diameter group) the circumference dropped drammatically and the least maximum diameter group (Tree group 1) surpassed it greatly. Tree group five ended up being in the middle of the rank. The middle ranking group -Tree group three- has the greatest circumference in the last data point on 1973.
+
+#### We see below that the groups are sequentially divided having mean diameter greater then the last group.
+
+![](CaseStudy2_files/figure-markdown_github/Orange%20Circumference%20Over%20Group-1.png)
 
 ### 3i. Find the difference between the maximum and the minimum monthly average temperatures for each country and report/visualize top 20 countries with the maximum differences for the period since 1900.
 

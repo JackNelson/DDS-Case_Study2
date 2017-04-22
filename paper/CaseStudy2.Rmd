@@ -54,13 +54,13 @@ Orange_Median <- median(Circum)
 Orange_Trees <- Orange$Tree
 ```
 
-The mean circumference of the Orange trees is 115.8571 centimeters trunk circumference.
+##### The mean circumference of the Orange trees is 115.8571 centimeters trunk circumference.
 
 ```{r Mean, echo=TRUE}
 Orange_Mean
 ```
 
-The median circumference of the Orange trees is 115 centimeters.
+##### The median circumference of the Orange trees is 115 centimeters.
 
 ```{r Median, echo=TRUE}
 Orange_Median
@@ -70,25 +70,47 @@ Orange_Median
 
 ## Orange Tree Circumference against Age
 
-Here we show as the tree gets older it gets wider but none gets bigger then Tree 5 and none is smaller then Tree 1.
-```{r pressure, echo=FALSE}
+```{r Orange Circumference Against Age, echo=FALSE}
+colors<-c("blue","red","green","maroon","purple")
+
+# Data taken was days since "1968/12/31" we will use that to create a new variable TreeAge
+BaseDate <-as.Date("1968/12/31")
+Orange$TreeAge<- BaseDate+Orange$age
+
+# Sort the levels so we match the colors respectively between the two plots  
+
+levels(Orange$Tree) <-sort(levels(Orange$Tree))
 
 # Create a scatter plot circumference against age using the number of tree to define the symbol 
 
-plot(Orange$circumference~Orange$age,
-     pch=c(1,2,3,4,5)[Orange$Tree],
-     col=c("blue","red","green","maroon","purple")[Orange$Tree], xlab="Age",ylab="Circumference")
+plot(Orange$circumference~Orange$TreeAge,
+     pch= as.numeric(levels(Orange$Tree)),
+     col=colors, xlab="Age",ylab="Circumference")
 
 # Create the legend for the trees.  
-legend("topleft",c("Tree 1", "Tree 2", "Tree 3", "Tree 4", "Tree 5"),
-       pch=c(1,2,3,4,5),col=c("blue","red","green","maroon","purple"))
+legend("topleft",paste("Tree grp. " ,levels(Orange$Tree)),
+       pch=as.numeric(levels(Orange$Tree)),col=colors)
+
+# Order the Orange data set by circumference
+```
+
+#### At some point in the lifecycle of Tree group five (the highest maximum diameter group) the circumference dropped drammatically and the least maximum diameter group (Tree group 1) surpassed it greatly. Tree group five ended up being in the middle of the rank. The middle ranking group -Tree group three- has the greatest circumference in the last data point on 1973.
+
+#### We see below that the groups are sequentially divided having mean diameter greater then the last group.
+```{r Orange Circumference Over Group, echo=FALSE}
+OrderedOrange<- Orange[order(Orange$circumference),]
 
 # Create a box plot of tree circumference for each of the category of trees
-boxplot(Orange$circumference~Orange$Tree,data=Orange, main="Orange Tree Circumference against Tree", 
-        xlab="Tree", ylab="Circumference", pch=Orange$Tree,col=c("blue","red","green","maroon","purple"))
+
+boxplot(OrderedOrange$circumference~OrderedOrange$Tree,data=OrderedOrange, 
+        main="Orange Tree Circumference against Tree", 
+        xlab="Tree Groups", ylab="Circumference",
+        names= paste("Tree grp. " ,levels(OrderedOrange$Tree)),
+        pch=levels(OrderedOrange$Tree),col=colors)
 
 ```
-In the preceding 2 plots we see that Tree 3 is the smallest and Tree 4 is the largest.
+
+ 
 
 
 ### 3i. Find the difference between the maximum and the minimum monthly average temperatures for each country and report/visualize top 20 countries with the maximum differences for the period since 1900.
