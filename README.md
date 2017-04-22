@@ -5,7 +5,7 @@ Orange Trees and Land Temperature Data
 Contributors: Georges Michel, Jack Nelson, Nicole Shaver, Nathan Tuttle
 
 # PURPOSE OF PROJECT
-Examine Orange tree growth against age. And temperature comparisons in city and country...
+Examine Orange tree growth against age. Compare temperature in city and country...
 
 # COPYRIGHT INFO
 
