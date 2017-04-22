@@ -5,7 +5,7 @@ April 13, 2017
 
 ### Introduction
 
-In this study....
+In this study, using Orange tree data from R, we will investigate orange tree growth and the relationship between tree age and circumference by tree size. We will examine land temperature differences from data that contains the monthly average temperatures since 1900 by country and by city. For the top 20 countries and cities, ranked by temperature difference, we will then examine the relationship between their minimum and maximum monthly average temperatures. Finally, we will examine land temperatures by month in the United States and look for trends in the data, and will look for temperature differences by year.
 
     ##  Tree       age         circumference  
     ##  3:7   Min.   : 118.0   Min.   : 30.0  
@@ -42,6 +42,8 @@ source(paste(dir,"/source/download_2.R",sep=""))
 source(paste(dir,"/source/cleanup_2.R",sep=""))
 source(paste(dir,"/source/CityTemp_cleanup.R",sep=""))
 ```
+
+### Question 2 Insert Here
 
 ### 3i. Find the difference between the maximum and the minimum monthly average temperatures for each country and report/visualize top 20 countries with the maximum differences for the period since 1900.
 
@@ -150,7 +152,7 @@ T20MinMaxTempLong <- transform(T20MinMaxTempLong, Country=reorder(Country, -Temp
 ggplot(T20MinMaxTempLong, aes(x=Country, y=Monthly.AvgTemp, 
     group=Country, factor(TempDiff))) + 
   geom_point(size=2)+geom_path(arrow=arrow()) +
-  labs(y = 'Monthly Average Temperature (Celcius)',
+  labs(y = 'Monthly Average Temperature (Celsius)',
       title = 'Minimum & Maximum Monthly Average Temperature by Country 
       (Since 1900)') +
   theme(axis.text.x = element_text(angle = -90, hjust = 0, vjust = 0.5),
@@ -168,7 +170,7 @@ ggplot(T20MinMaxTempLong, aes(x=Country, y=Monthly.AvgTemp,
 ``` r
 ggplot(T20MinMaxTempLong, aes(x=Date, y=Monthly.AvgTemp, color=Min.Max)) + 
   geom_point(size=2) +
-  labs(x = 'Year', y = 'Monthly Avgerage Temperature (Celcius)', 
+  labs(x = 'Year', y = 'Monthly Avgerage Temperature (Celsius)', 
       title = 'Minimum & Maximum Monthly Average Temperature vs. Year (Since 1900)',
       color = "") +
   theme(plot.title = element_text(size=12, face='bold', hjust=0.5))
@@ -176,7 +178,7 @@ ggplot(T20MinMaxTempLong, aes(x=Date, y=Monthly.AvgTemp, color=Min.Max)) +
 
 ![](CaseStudy2_files/figure-markdown_github/T20scatterplot-1.png)
 
-### Q3ii.a. Select a subset of data called “UStemp” where US land temperatures from 01/01/1990 in Temp data. Use UStemp dataset to answer the followings. Create a new column to display the monthly average land temperatures in Fahrenheit (°F).
+### Q3ii.a. Select a subset of data called "UStemp" where US land temperatures from 01/01/1990 in Temp data. Use UStemp dataset to answer the followings. Create a new column to display the monthly average land temperatures in Fahrenheit (°F).
 
 #### Using the data from 1900 to 2013 for average land temperatures only in the United States, we can convert the temperatures from degrees C to degrees F using the formula Temp (deg F) = Temp (deg C)\* 1.8 +32.
 
@@ -190,6 +192,22 @@ UStemp$Monthly.AverageTemp.degF<-(UStemp$Monthly.AverageTemp.degC*1.8)+32
 head(UStemp)
 ```
 
+<<<<<<< HEAD
+    ##      Monthly.AverageTemp.degC Monthly.AverageTemp.Uncertainty
+    ## 186                    -3.583                           0.213
+    ## 1064                   13.906                           0.159
+    ## 1297                   20.935                           0.424
+    ## 1428                   -0.453                           0.201
+    ## 1573                    2.073                           0.124
+    ## 1802                   -1.586                           0.122
+    ##            Country       Date Monthly.AverageTemp.degF
+    ## 186  United States 1974-01-01                  25.5506
+    ## 1064 United States 1997-05-01                  57.0308
+    ## 1297 United States 1967-07-01                  69.6830
+    ## 1428 United States 1982-12-01                  31.1846
+    ## 1573 United States 1980-03-01                  35.7314
+    ## 1802 United States 2008-02-01                  29.1452
+=======
     ##        Monthly.AverageTemp.degC Monthly.AverageTemp.Uncertainty
     ## 110207                   -1.702                           0.206
     ## 113557                    8.534                           0.103
@@ -204,6 +222,7 @@ head(UStemp)
     ## 117050 United States 1972-02-01                  27.8852
     ## 117915 United States 2008-07-01                  71.0420
     ## 118266 United States 1986-11-01                  36.5072
+>>>>>>> e9cf5afd2375be9011c8e8b33be7451178a20055
 
 ### Q3ii.b. Calculate average land temperature by year and plot it. The original file has the average land temperature by month.
 
@@ -214,7 +233,14 @@ head(UStemp)
 
 UStemp$Year<-as.POSIXlt(UStemp$Date)$year+1900
 UStempYear<-ddply(UStemp,~Year,summarise,Temp.mean.degF=mean(Monthly.AverageTemp.degF))
-ggplot(UStempYear, aes(x = Year, y=Temp.mean.degF))+geom_point()+geom_smooth()+labs(y="Average Land Temp (deg F)")+labs(title = "Average Land Temperature by Year in United States")+geom_line()+scale_x_continuous(breaks=seq(1900,2015,5))+theme(axis.text.x = element_text(size=10, angle=90))+scale_y_continuous(breaks=seq(40,56,1))
+ggplot(UStempYear, aes(x = Year, y=Temp.mean.degF))+
+  geom_point()+
+  geom_smooth()+
+  labs(y="Average Land Temp (deg F)")+
+  labs(title = "Average Land Temperature by Year in United States")+
+  geom_line()+scale_x_continuous(breaks=seq(1900,2015,5))+
+  theme(axis.text.x = element_text(size=10, angle=90))+
+  scale_y_continuous(breaks=seq(40,56,1))
 ```
 
     ## `geom_smooth()` using method = 'loess'
@@ -238,7 +264,7 @@ UStempYear_sorta[which(UStempYear_sorta$UStempYear.delta == max(UStempYear_sorta
     ##    Year Temp.mean.degF UStempYear.delta.degF    Year_lab
     ## 22 1921        49.2722                2.5401 1920 - 1921
 
-### 3iii. Download “CityTemp” data set at box.com. Find the difference between the maximum and the minimum temperatures for each major city and report/visualize top 20 cities with maximum differences for the period since 1900.
+### 3iii. Download CityTemp data set at box.com. Find the difference between the maximum and the minimum temperatures for each major city and report/visualize top 20 cities with maximum differences for the period since 1900.
 
 #### The following code chunk takes the CityTemp\_clean data frame and returns T20MinMaxCityTemp, the top 20 cities with the greatest temperature difference between their minimum and maximum Monthly.AvgTemp observations since 1/1/1900.
 
@@ -349,13 +375,13 @@ T20MinMaxCityTempLong <- T20MinMaxCityTempLong[order(-T20MinMaxCityTempLong$Temp
 T20MinMaxCityTempLong <- transform(T20MinMaxCityTempLong, City=reorder(City, -TempDiff) )
 ```
 
-#### The following code chunk plots the T20MinMaxCityTemp data frame with City in the x axis ranked by TempDiff and Monthly.AvgTemp in the y axis. The Min and Max values are plotting with labels indicating the year the observation occurred. An arrow then indicates which observation occurred first (Min prior to Max = Up; Max prior to Min = Down)
+#### The following code chunk plots the T20MinMaxCityTemp data frame with City in the x axis ranked by TempDiff and Monthly.AvgTemp in the y axis. The Min and Max values are plotting with labels indicating the year the observation occurred. An arrow then indicates which observation occurred first (Min prior to Max = Up; Max prior to Min = Down).
 
 ``` r
 ggplot(T20MinMaxCityTempLong, aes(x=City, y=Monthly.AvgTemp, 
                                group=City, factor(TempDiff))) + 
   geom_point(size=2)+geom_path(arrow=arrow()) +
-  labs(y = 'Monthly Average Temperature (Celcius)',
+  labs(y = 'Monthly Average Temperature (Celsius)',
        title = 'Minimum & Maximum Monthly Average Temperature by City (Since 1900)') +
   theme(axis.text.x = element_text(angle = -90, hjust = 0, vjust = 0.5),
         plot.title = element_text(size=10, face='bold', hjust=0.5)) + 
@@ -367,12 +393,12 @@ ggplot(T20MinMaxCityTempLong, aes(x=City, y=Monthly.AvgTemp,
 
 ![](CaseStudy2_files/figure-markdown_github/T20Cityplot-1.png)
 
-#### The following code chunk plots the T20MinMaxCityTemp data frame with Year in the x axis and Monthly.AvgTemp in the y axis. The Min and Max Monthly.AvgTemp values are plotted by color.
+#### The following code chunk plots the T20MinMaxCityTemp data frame with Year in the x axis and Monthly.AvgTemp in the y axis. The Min and Max Monthly Average Temperature (Monthly.AvgTemp) values are plotted by color.
 
 ``` r
 ggplot(T20MinMaxCityTempLong, aes(x=Date, y=Monthly.AvgTemp, color=Min.Max)) + 
   geom_point(size=2) +
-  labs(x = 'Year', y = 'Monthly Avgerage Temperature (Celcius)', 
+  labs(x = 'Year', y = 'Monthly Avgerage Temperature (Celsius)', 
        title = 'Minimum & Maximum Monthly Average Temperature vs. Year (Since 1900)',
        color = "") +
   theme(plot.title = element_text(size=12, face='bold', hjust=0.5))
@@ -382,4 +408,9 @@ ggplot(T20MinMaxCityTempLong, aes(x=Date, y=Monthly.AvgTemp, color=Min.Max)) +
 
 ### 3iv. Compare the two graphs in (i) and (iii) and comment it.
 
-#### The initial plots with arrows indicating if the minimum or maximum Monthly.AvgTemp occurred first shows commonalities between the top 20 countries and 20 cities with the highest TempDiff since 1/1/1900. 18 out of 20 countries and 15 out of 20 cities have their maximum Monthly.AvgTemp occurring later than the minimum Monthly.AvgTemp. The scatter plot showing minimum and maximum Monthly.AvgTemp by year is even more telling. There is appears to be a grouping for maximum values between 1980-present (18 out of 20 countries, 16 out of 20 cities). Without the use of advanced statistics and only using the visual graphics, it appears Monthly.AvgTemp for the top 20 countries and cities with the highest TempDiff since 1/1/1900 has been rising in the last 40 years.
+#### The initial plots have arrows indicating a minimum or maximum Monthly Average Temperature (Monthly.AvgTemp). The arrows in the plot show commonalities between the top 20 countries and top 20 cities with the highest TempDiff since 1/1/1900. Eighteen out of 20 countries and 15 out of 20 cities have their maximum Monthly Average Temperature (Monthly.AvgTemp) occurring later than the minimum Monthly Average Temperature (Monthly.AvgTemp). The scatter plot showing minimum and maximum Monthly Average Temperature (Monthly.AvgTemp) by year is even more telling. There appears to be a grouping for maximum values between 1980-present (18 out of 20 countries, 16 out of 20 cities). Without the use of advanced statistics and only using visual inspection, it appears that the Monthly Average Temperature (Monthly.AvgTemp) of the top 20 countries and cities with the highest TempDiff since 1/1/1900 has been rising in the last 40 years.
+
+Conclusion
+----------
+
+In this study, we find visual evidence that further investigation is warranted to determine if monthly average temperatures have been rising since January 1900. This assertion is based on data from the top 20 countries and cities with the greatest temperature differences. Additionally, we we find that in the United States, the maximum absolute temperature difference by year is 2.5401 degrees F (1920-1921), and that there is a general trend up in average land temperature.
