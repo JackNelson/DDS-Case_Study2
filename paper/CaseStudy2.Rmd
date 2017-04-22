@@ -20,6 +20,7 @@ library(ggplot2)
 library(gdata)
 library(stats)
 library(reshape2)
+library(graphics)
 ```
 
 ### Introduction
@@ -28,6 +29,7 @@ In this study, using Orange tree data from R, we will investigate orange tree gr
 
 
 #### Code used to download and tidy data
+
 ```{r download_tidy_merge}
 dir<-getwd()
 #download the TEMP temp file and assign it to dataset name Temp_clean
@@ -36,7 +38,57 @@ source(paste(dir,"/source/download_2.R",sep=""))
 source(paste(dir,"/source/cleanup_2.R",sep=""))
 source(paste(dir,"/source/CityTemp_cleanup.R",sep=""))
 ```
-### Question 2 Insert Here
+
+### Orange Tree Data
+```{r Orange, echo=FALSE}
+
+summary(Orange)
+
+
+Circum <- Orange$circumference
+
+Orange_Mean <- mean(Circum)
+
+Orange_Median <- median(Circum)
+
+Orange_Trees <- Orange$Tree
+```
+
+The mean circumference of the Orange trees is 115.8571 centimeters trunk circumference.
+
+```{r Mean, echo=TRUE}
+Orange_Mean
+```
+
+The median circumference of the Orange trees is 115 centimeters.
+
+```{r Median, echo=TRUE}
+Orange_Median
+
+```
+
+
+## Orange Tree Circumference against Age
+
+Here we show as the tree gets older it gets wider but none gets bigger then Tree 5 and none is smaller then Tree 1.
+```{r pressure, echo=FALSE}
+
+# Create a scatter plot circumference against age using the number of tree to define the symbol 
+
+plot(Orange$circumference~Orange$age,
+     pch=c(1,2,3,4,5)[Orange$Tree],
+     col=c("blue","red","green","maroon","purple")[Orange$Tree], xlab="Age",ylab="Circumference")
+
+# Create the legend for the trees.  
+legend("topleft",c("Tree 1", "Tree 2", "Tree 3", "Tree 4", "Tree 5"),
+       pch=c(1,2,3,4,5),col=c("blue","red","green","maroon","purple"))
+
+# Create a box plot of tree circumference for each of the category of trees
+boxplot(Orange$circumference~Orange$Tree,data=Orange, main="Orange Tree Circumference against Tree", 
+        xlab="Tree", ylab="Circumference", pch=Orange$Tree,col=c("blue","red","green","maroon","purple"))
+
+```
+In the preceding 2 plots we see that Tree 3 is the smallest and Tree 4 is the largest.
 
 
 ### 3i. Find the difference between the maximum and the minimum monthly average temperatures for each country and report/visualize top 20 countries with the maximum differences for the period since 1900.

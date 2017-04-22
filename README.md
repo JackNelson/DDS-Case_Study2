@@ -6,6 +6,7 @@ Contributors: Georges Michel, Jack Nelson, Nicole Shaver, Nathan Tuttle
 
 # PURPOSE OF PROJECT
 
+In this study we examine the relationship between orange tree size and circumference. We will also look at land size temperature across the United States compared to the world looking for short term and long term trends.
 
 # COPYRIGHT INFO
 
@@ -32,7 +33,7 @@ The original file structure is as follows:
 
   + data <- CityTemp.csv | TEMP.csv
 
-  + paper <- CaseStudy2_Q3i.Rmd | CaseStudy2_Q3i.md | CaseStudy2_Q3ii.Rmd | CaseStudy2_Q3ii.md | Case Study 2.docx
+  + paper <- CaseStudy2.Rmd | Case Study 2.docx
 
   + source <- CityTemp_cleanup.R | cleanup_2.R | download_2.R
 
@@ -46,10 +47,9 @@ The file structure should be as follows:
   
   + data <- CityTemp.csv | TEMP.csv
   
-  + paper <- CaseStudy2_Q3i.Rmd | CaseStudy2_Q3i.md | CaseStudy2_Q3ii.Rmd | CaseStudy2_Q3ii.md | Case Study 2.docx
+  + paper <- CaseStudy2.Rmd | Case Study 2.docx
              
-    + CaseStudy2_Q3i_files 
-    | Is this neccessary
+    + CaseStudy2_files 
   
   + source <- CityTemp_cleanup.R | cleanup_2.R | download_2.R
 
@@ -63,6 +63,10 @@ README.md
  
   + Builds Case Study 2 markdown
 	
+Orange
+
+  + Data for Orange trees
+
 TEMP.csv
   
   + Data for country trees
@@ -132,9 +136,6 @@ Country
 
   + The name of the country (char)
 
-
-_Unused variables:_
-
 MonthlyAverageTempUncertainty
 
   + Uncertainty in monthly average land temperature, in degrees Celsius (num)
@@ -146,6 +147,30 @@ Latitude
 Longitude
 
   + Longitude, in degrees east of west of the meridian (char)
+
+_Unused variables:_
+
+  
+*Orange*
+
+_Variables used for study:_
+
+Tree
+  
+Used from R help.
+  + An ordered factor indicating the tree on which the measurement is made. The ordering is according to increasing maximum diameter.
+
+age
+
+Used from R help.
+  + A numeric vector giving the age of the tree (days since 1968/12/31)
+  
+circumference
+
+Used from R help.
+  + A numeric vector of trunk circumferences (mm). This is probably "circumference at breast height", a standard measurement in forestry.
+
+_Unused variables:_
 
 # HOW TO REPRODUCE RESEARCH
 

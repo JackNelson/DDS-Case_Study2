@@ -18,7 +18,36 @@ source(paste(dir,"/source/cleanup_2.R",sep=""))
 source(paste(dir,"/source/CityTemp_cleanup.R",sep=""))
 ```
 
-### Question 2 Insert Here
+### Orange Tree Data
+
+    ##  Tree       age         circumference  
+    ##  3:7   Min.   : 118.0   Min.   : 30.0  
+    ##  1:7   1st Qu.: 484.0   1st Qu.: 65.5  
+    ##  5:7   Median :1004.0   Median :115.0  
+    ##  2:7   Mean   : 922.1   Mean   :115.9  
+    ##  4:7   3rd Qu.:1372.0   3rd Qu.:161.5  
+    ##        Max.   :1582.0   Max.   :214.0
+
+The mean circumference of the Orange trees is 115.8571 centimeters trunk circumference.
+
+``` r
+Orange_Mean
+```
+
+    ## [1] 115.8571
+
+The median circumference of the Orange trees is 115 centimeters.
+
+``` r
+Orange_Median
+```
+
+    ## [1] 115
+
+Orange Tree Circumference against Age
+-------------------------------------
+
+Here we show as the tree gets older it gets wider but none gets bigger then Tree 5 and none is smaller then Tree 1. ![](CaseStudy2_files/figure-markdown_github/pressure-1.png)![](CaseStudy2_files/figure-markdown_github/pressure-2.png) In the preceding 2 plots we see that Tree 3 is the smallest and Tree 4 is the largest.
 
 ### 3i. Find the difference between the maximum and the minimum monthly average temperatures for each country and report/visualize top 20 countries with the maximum differences for the period since 1900.
 
@@ -167,7 +196,6 @@ UStemp$Monthly.AverageTemp.degF<-(UStemp$Monthly.AverageTemp.degC*1.8)+32
 head(UStemp)
 ```
 
-<<<<<<< HEAD
     ##      Monthly.AverageTemp.degC Monthly.AverageTemp.Uncertainty
     ## 186                    -3.583                           0.213
     ## 1064                   13.906                           0.159
@@ -182,22 +210,6 @@ head(UStemp)
     ## 1428 United States 1982-12-01                  31.1846
     ## 1573 United States 1980-03-01                  35.7314
     ## 1802 United States 2008-02-01                  29.1452
-=======
-    ##        Monthly.AverageTemp.degC Monthly.AverageTemp.Uncertainty
-    ## 110207                   -1.702                           0.206
-    ## 113557                    8.534                           0.103
-    ## 116909                    9.848                           0.201
-    ## 117050                   -2.286                           0.154
-    ## 117915                   21.690                           0.110
-    ## 118266                    2.504                           0.186
-    ##              Country       Date Monthly.AverageTemp.degF
-    ## 110207 United States 1934-12-01                  28.9364
-    ## 113557 United States 2009-10-01                  47.3612
-    ## 116909 United States 1933-10-01                  49.7264
-    ## 117050 United States 1972-02-01                  27.8852
-    ## 117915 United States 2008-07-01                  71.0420
-    ## 118266 United States 1986-11-01                  36.5072
->>>>>>> e9cf5afd2375be9011c8e8b33be7451178a20055
 
 ### Q3ii.b. Calculate average land temperature by year and plot it. The original file has the average land temperature by month.
 
