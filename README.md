@@ -29,7 +29,7 @@ The original file structure is as follows:
 
   + ReadME.md
 
-  + Makefile.txt
+  + Makefile
 
   + data <- CityTemp.csv | TEMP.csv
 
@@ -43,13 +43,16 @@ The file structure should be as follows:
 
   + ReadME.md
   
-  + Makefile.txt
+  + Makefile
   
   + data <- CityTemp.csv | TEMP.csv
   
-  + paper <- CaseStudy2.Rmd | Case Study 2.docx
+  + paper <- CaseStudy2.Rmd | Case Study 2.docx | CaseStudy2.md | CaseStudy2.html
              
     + CaseStudy2_files 
+      
+      + figure-markdown_github <- (* Various PNGs *)
+      
   
   + source <- CityTemp_cleanup.R | cleanup_2.R | download_2.R
 
@@ -177,7 +180,7 @@ _Unused variables:_
 To reproduce the study download the project to the desired file path.  Open up the 
 command line on your machine.  Navigate to the file path the project was downloaded to
 in the command line.  Type 'make clean' in the command line.  Then type 'make all' in
-the command line.  The remaining files along with the GDPandEducation_CaseStudy1.html
+the command line.  The remaining files along with the CaseStudy2.html
 should be populated in the project's paper folder.
 
 # SESSIONINFO()
