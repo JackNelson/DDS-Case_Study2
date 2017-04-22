@@ -6,7 +6,7 @@ Contributors: Georges Michel, Jack Nelson, Nicole Shaver, Nathan Tuttle
 
 # PURPOSE OF PROJECT
 
-In this study we examine the relationship between orange tree size and circumference. We will also look at land size temperature across the United States compared to the world looking for short term and long term trends.
+In this study we examine the relationship between orange trees grouped into five groups of ascending diameter by age and circumference. We will also look at land size temperature across the United States compared to the world looking for short term and long term trends.
 
 # COPYRIGHT INFO
 

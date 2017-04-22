@@ -94,7 +94,7 @@ legend("topleft",paste("Tree grp. " ,levels(Orange$Tree)),
 # Order the Orange data set by circumference
 ```
 
-#### At some point in the lifecycle of Tree group five (the highest maximum diameter group) the circumference dropped drammatically and the least maximum diameter group (Tree group 1) surpassed it greatly. Tree group five ended up being in the middle of the rank. The middle ranking group -Tree group three- has the greatest circumference in the last data point on 1973.
+#### At some point in the lifecycle of Tree group five (the highest maximum diameter group) the circumference dropped drammatically and the least maximum diameter group (Tree grp. 1) surpassed it greatly. Tree group five ended up being in the middle of the rank. The middle ranking group -Tree grp. 3- has the greatest circumference in the last data point on 1973.
 
 #### We see below that the groups are sequentially divided having mean diameter greater then the last group.
 ```{r Orange Circumference Over Group, echo=FALSE}
