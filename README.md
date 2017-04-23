@@ -78,13 +78,9 @@ CityTemp.csv
 
   + Data for city trees
 
-CaseStudy2_Q3i.Rmd
+CaseStudy2.Rmd
 
-  + Question 1 R markdown file that generates the analysis and conclusion for the case study
-
-CaseStudy2_Q3ii.Rmd
-
-  + Question 2 + R markdown file that generates the analysis and conclusion for the case study
+  + Questions 2 and Questions 3 R Markdown code
 
 CityTemp_cleanup.R  
 

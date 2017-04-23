@@ -21,6 +21,7 @@ source(paste(dir,"/source/CityTemp_cleanup.R",sep=""))
 ### Orange Tree Data
 
 ``` r
+# Calculate the mean and the median of the trunk circumferences for different size of the trees. (Tree) 
 summary(Orange)
 ```
 
@@ -40,8 +41,6 @@ Orange_Mean <- mean(Circum)
 Orange_Median <- median(Circum)
 
 Orange_Trees <- Orange$Tree
-
-##### Calculate the mean and the median of the trunk circumferences for different size of the trees. (Tree) 
 ```
 
 ##### The mean circumference by Tree group.
@@ -159,12 +158,18 @@ T20MinMaxTemp <- MinMaxTemp[1:20, ]
 
 ``` r
 # putting minimum metrics in long format from T20MinMaxTemp
-T20MinMaxTemp1 <- melt(T20MinMaxTemp[, c(1:3,6)], id = c("Country","Min.Date", "TempDiff"), variable.name = "Min.Max", value.name = 'Monthly.AvgTemp')
+T20MinMaxTemp1 <- melt(T20MinMaxTemp[, c(1:3,6)], 
+                       id = c("Country","Min.Date", "TempDiff"), 
+                       variable.name = "Min.Max", value.name = 'Monthly.AvgTemp')
+
 # taking only first 3 character to indicate min observation
 T20MinMaxTemp1$Min.Max <- substr(T20MinMaxTemp1$Min.Max, 0, 3)
 
 # putting maximum metrics in long format from T20MinMaxTemp
-T20MinMaxTemp2 <- melt(T20MinMaxTemp[, c(1,4,5,6)], id = c("Country","Max.Date", "TempDiff"), variable.name = "Min.Max", value.name = 'Monthly.AvgTemp')
+T20MinMaxTemp2 <- melt(T20MinMaxTemp[, c(1,4,5,6)], 
+                       id = c("Country","Max.Date", "TempDiff"), 
+                       variable.name = "Min.Max", value.name = 'Monthly.AvgTemp')
+
 # taking only first 3 characters to indicate max observation
 T20MinMaxTemp2$Min.Max <- substr(T20MinMaxTemp2$Min.Max, 0, 3)
 
@@ -219,7 +224,10 @@ ggplot(T20MinMaxTempLong, aes(x=Date, y=Monthly.AvgTemp, color=Min.Max)) +
 #### Using the data from 1900 to 2013 for average land temperatures only in the United States, we can convert the temperatures from degrees C to degrees F using the formula Temp (deg F) = Temp (deg C)\* 1.8 +32.
 
 ``` r
-#The following code chunk will keep only the data since 1900, subset only the data from the United States, rename the temperature column in the existing dataset to be explicitly in degrees C. It will then add a column with the temperature data converted to degrees C and display the first few rows of the resulting table.
+#The following code chunk will keep only the data since 1900, subset only the data from the United States, 
+# rename the temperature column in the existing dataset to be explicitly in degrees C. 
+# It will then add a column with the temperature data converted to degrees C and display the first 
+# few rows of the resulting table.
 
 
 UStemp<-Temp_clean1900[grep("United States", Temp_clean1900$Country), ]
@@ -248,7 +256,8 @@ head(UStemp)
 #### Calculating the average land temperature by Year and plotting it, we see a general trend up in average land temperatures in the United States between 1900 and 2013.
 
 ``` r
-#The following code chunk will take the year portion of each month, summarize the temperature data in degrees F by year, and then plot the Temperature data by year.
+#The following code chunk will take the year portion of each month, summarize the temperature data 
+# in degrees F by year, and then plot the Temperature data by year.
 
 UStemp$Year<-as.POSIXlt(UStemp$Date)$year+1900
 UStempYear<-ddply(UStemp,~Year,summarise,Temp.mean.degF=mean(Monthly.AverageTemp.degF))
@@ -271,7 +280,9 @@ ggplot(UStempYear, aes(x = Year, y=Temp.mean.degF))+
 #### Calculating the one year difference of average land temperature by year, we find that the maximum absolute temperature difference is 2.5401 degrees F, and occurred between 1920 and 1921.
 
 ``` r
-#The code chunk below will first sort the data, by year, in ascending order. Then, it will calculate the 1 year deltas (ie 1991-1990,1992-1991), take the absolute value, and then report the max value and the years and the corresponding 2 years.
+#The code chunk below will first sort the data, by year, in ascending order. 
+# Then, it will calculate the 1 year deltas (ie 1991-1990,1992-1991), take the absolute value, and 
+# then report the max value and the years and the corresponding 2 years.
 
 
 UStempYear_sorta<-arrange(UStempYear,Year)
