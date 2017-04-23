@@ -18,34 +18,10 @@ source(paste(dir,"/source/cleanup_2.R",sep=""))
 source(paste(dir,"/source/CityTemp_cleanup.R",sep=""))
 ```
 
-### Orange Tree Data
-
-``` r
-# Calculate the mean and the median of the trunk circumferences for different size of the trees. (Tree) 
-summary(Orange)
-```
-
-    ##  Tree       age         circumference  
-    ##  3:7   Min.   : 118.0   Min.   : 30.0  
-    ##  1:7   1st Qu.: 484.0   1st Qu.: 65.5  
-    ##  5:7   Median :1004.0   Median :115.0  
-    ##  2:7   Mean   : 922.1   Mean   :115.9  
-    ##  4:7   3rd Qu.:1372.0   3rd Qu.:161.5  
-    ##        Max.   :1582.0   Max.   :214.0
-
-``` r
-Circum <- Orange$circumference
-
-Orange_Mean <- mean(Circum)
-
-Orange_Median <- median(Circum)
-
-Orange_Trees <- Orange$Tree
-```
-
 ##### The mean circumference by Tree group.
 
 ``` r
+# Calculate the mean and the median of the trunk circumferences for different size of the trees. (Tree) 
 aggregate(formula=circumference~Tree,data=Orange,FUN = mean)
 ```
 
@@ -72,11 +48,45 @@ aggregate(formula=circumference~Tree,data=Orange,FUN = median)
 Orange Tree Circumference against Age
 -------------------------------------
 
+``` r
+colors<-c("blue","red","green","maroon","purple")
+
+# Sort the levels so we match the colors respectively between the two plots  
+
+levels(Orange$Tree) <-sort(levels(Orange$Tree))
+
+# Create a scatter plot circumference against age using the number of tree to define the symbol 
+
+# Data taken was days since "1968/12/31" 
+
+plot(Orange$circumference~Orange$age,
+     pch= as.numeric(levels(Orange$Tree)),
+     col=colors, xlab="Age (in days)",ylab="Circumference")
+
+# Create the legend for the trees.  
+legend("topleft",paste("Tree grp. " ,levels(Orange$Tree)),
+       pch=as.numeric(levels(Orange$Tree)),col=colors)
+```
+
 ![](CaseStudy2_files/figure-markdown_github/Orange%20Circumference%20Against%20Age-1.png)
 
 #### At some point in the lifecycle of Tree group five (the highest maximum diameter group) the circumference dropped drammatically and the least maximum diameter group (Tree grp. 1) surpassed it greatly. Tree group five ended up being in the middle of the rank. The middle ranking group -Tree grp. 3- has the greatest circumference in the last data point.
 
 #### We see below that the groups are sequentially divided having mean diameter greater then the last group.
+
+``` r
+# Order the Orange data set by circumference
+
+OrderedOrange<- Orange[order(Orange$circumference),]
+
+# Create a box plot of tree circumference for each of the category of trees
+
+boxplot(OrderedOrange$circumference~OrderedOrange$Tree,data=OrderedOrange, 
+        main="Orange Tree Circumference against Tree", 
+        xlab="Tree Groups", ylab="Circumference",
+        names= paste("Tree grp. " ,levels(OrderedOrange$Tree)),
+        pch=levels(OrderedOrange$Tree),col=colors)
+```
 
 ![](CaseStudy2_files/figure-markdown_github/Orange%20Circumference%20Over%20Group-1.png)
 
