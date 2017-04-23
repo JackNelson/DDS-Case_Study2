@@ -49,9 +49,9 @@ The file structure should be as follows:
   
   + paper <- CaseStudy2.Rmd | Case Study 2.docx | CaseStudy2.md | CaseStudy2.html
              
-    + CaseStudy2_files 
+    + CaseStudy2_files
       
-      + figure-markdown_github <- (* Various PNGs *)
+    +     figure-markdown_github <- (* Various PNGs *)
       
   
   + source <- CityTemp_cleanup.R | cleanup_2.R | download_2.R
@@ -72,11 +72,11 @@ Orange
 
 TEMP.csv
   
-  + Data for country trees
+  + Data for country temperature
 
 CityTemp.csv
 
-  + Data for city trees
+  + Data for city temperature
 
 CaseStudy2.Rmd
 
@@ -103,9 +103,11 @@ _Variables used for study:_
 Date
 
   + Date in Year-Month-Day or Month/Day/Year format (char)
+
 MonthlyAverageTemp
 
   + The monthly average land temperature, in degrees Celsius(num)
+
 Country
 
   + The name of the country (char)
@@ -123,6 +125,7 @@ _Variables used for study and their description:_
 Date
 
   + Date in Year-Month-Day or Month/Day/Year format (char)
+  
 MonthlyAverageTemp
 
   + The monthly average land temperature, in degrees Celsius(num)
