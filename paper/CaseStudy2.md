@@ -20,6 +20,10 @@ source(paste(dir,"/source/CityTemp_cleanup.R",sep=""))
 
 ### Orange Tree Data
 
+``` r
+summary(Orange)
+```
+
     ##  Tree       age         circumference  
     ##  3:7   Min.   : 118.0   Min.   : 30.0  
     ##  1:7   1st Qu.: 484.0   1st Qu.: 65.5  
@@ -28,28 +32,50 @@ source(paste(dir,"/source/CityTemp_cleanup.R",sep=""))
     ##  4:7   3rd Qu.:1372.0   3rd Qu.:161.5  
     ##        Max.   :1582.0   Max.   :214.0
 
-##### The mean circumference of the Orange trees is 115.8571 centimeters trunk circumference.
-
 ``` r
-Orange_Mean
+Circum <- Orange$circumference
+
+Orange_Mean <- mean(Circum)
+
+Orange_Median <- median(Circum)
+
+Orange_Trees <- Orange$Tree
+
+##### Calculate the mean and the median of the trunk circumferences for different size of the trees. (Tree) 
 ```
 
-    ## [1] 115.8571
-
-##### The median circumference of the Orange trees is 115 centimeters.
+##### The mean circumference by Tree group.
 
 ``` r
-Orange_Median
+aggregate(formula=circumference~Tree,data=Orange,FUN = mean)
 ```
 
-    ## [1] 115
+    ##   Tree circumference
+    ## 1    3      94.00000
+    ## 2    1      99.57143
+    ## 3    5     111.14286
+    ## 4    2     135.28571
+    ## 5    4     139.28571
+
+##### The median circumference by Tree group.
+
+``` r
+aggregate(formula=circumference~Tree,data=Orange,FUN = median)
+```
+
+    ##   Tree circumference
+    ## 1    3           108
+    ## 2    1           115
+    ## 3    5           125
+    ## 4    2           156
+    ## 5    4           167
 
 Orange Tree Circumference against Age
 -------------------------------------
 
 ![](CaseStudy2_files/figure-markdown_github/Orange%20Circumference%20Against%20Age-1.png)
 
-#### At some point in the lifecycle of Tree group five (the highest maximum diameter group) the circumference dropped drammatically and the least maximum diameter group (Tree group 1) surpassed it greatly. Tree group five ended up being in the middle of the rank. The middle ranking group -Tree group three- has the greatest circumference in the last data point on 1973.
+#### At some point in the lifecycle of Tree group five (the highest maximum diameter group) the circumference dropped drammatically and the least maximum diameter group (Tree grp. 1) surpassed it greatly. Tree group five ended up being in the middle of the rank. The middle ranking group -Tree grp. 3- has the greatest circumference in the last data point.
 
 #### We see below that the groups are sequentially divided having mean diameter greater then the last group.
 
