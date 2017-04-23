@@ -6,18 +6,18 @@ Contributors: Georges Michel, Jack Nelson, Nicole Shaver, Nathan Tuttle
 
 # PURPOSE OF PROJECT
 
-In this study we examine the relationship between orange tree size and circumference. We will also look at land size temperature across the United States compared to the world looking for short term and long term trends.
+In this study we examine the relationship of age and circumference between orange trees grouped into five groups of ascending diameter. We will also look at land temperature across the United States and the world looking for short and long term trends.
 
 # COPYRIGHT INFO
 
 This project was generated for Southern Methodist University course MSDS 6306
-Doing Data Science: An Introduction to Data Science to complete Case Study 1
+Doing Data Science: An Introduction to Data Science to complete Case Study 2
 
 *Datasets sources*
 
 Orange: Built in R data set
 
-CityTemp: Provided by instructor
+TEMP.csv and CityTemp.csv: Provided by instructor
 
 # FILE ORGANIZATION
 
@@ -29,7 +29,7 @@ The original file structure is as follows:
 
   + ReadME.md
 
-  + Makefile.txt
+  + Makefile
 
   + data <- CityTemp.csv | TEMP.csv
 
@@ -43,13 +43,16 @@ The file structure should be as follows:
 
   + ReadME.md
   
-  + Makefile.txt
+  + Makefile
   
   + data <- CityTemp.csv | TEMP.csv
   
-  + paper <- CaseStudy2.Rmd | Case Study 2.docx
+  + paper <- CaseStudy2.Rmd | Case Study 2.docx | CaseStudy2.md | CaseStudy2.html
              
     + CaseStudy2_files 
+      
+      + figure-markdown_github <- (* Various PNGs *)
+      
   
   + source <- CityTemp_cleanup.R | cleanup_2.R | download_2.R
 
@@ -75,13 +78,9 @@ CityTemp.csv
 
   + Data for city trees
 
-CaseStudy2_Q3i.Rmd
+CaseStudy2.Rmd
 
-  + Question 1 R markdown file that generates the analysis and conclusion for the case study
-
-CaseStudy2_Q3ii.Rmd
-
-  + Question 2 + R markdown file that generates the analysis and conclusion for the case study
+  + Questions 2 and Questions 3 R Markdown code
 
 CityTemp_cleanup.R  
 
@@ -89,11 +88,11 @@ CityTemp_cleanup.R
   
 cleanup_2.R  
   
-  + R code file that downloads the GDP.csv and EDDATA.csv from the internet
+  + R code that cleans up TEMP.csv file
 
 download_2.R
 
-  + R code file that downloads the GDP.csv and EDDATA.csv from the internet
+  + R code that assigns TEMP.csv and CityTemp.csv to data frames
   
 # DATA INFO
 
@@ -177,7 +176,7 @@ _Unused variables:_
 To reproduce the study download the project to the desired file path.  Open up the 
 command line on your machine.  Navigate to the file path the project was downloaded to
 in the command line.  Type 'make clean' in the command line.  Then type 'make all' in
-the command line.  The remaining files along with the GDPandEducation_CaseStudy1.html
+the command line.  The remaining files along with the CaseStudy2.md
 should be populated in the project's paper folder.
 
 # SESSIONINFO()
