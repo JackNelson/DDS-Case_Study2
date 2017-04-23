@@ -219,7 +219,7 @@ ggplot(T20MinMaxTempLong, aes(x=Date, y=Monthly.AvgTemp, color=Min.Max)) +
 
 ![](CaseStudy2_files/figure-markdown_github/T20scatterplot-1.png)
 
-### Q3ii.a. Select a subset of data called "UStemp" where US land temperatures from 01/01/1990 in Temp data. Use UStemp dataset to answer the followings. Create a new column to display the monthly average land temperatures in Fahrenheit (°F).
+NA
 
 #### Using the data from 1900 to 2013 for average land temperatures only in the United States, we can convert the temperatures from degrees C to degrees F using the formula Temp (deg F) = Temp (deg C)\* 1.8 +32.
 
@@ -236,20 +236,20 @@ UStemp$Monthly.AverageTemp.degF<-(UStemp$Monthly.AverageTemp.degC*1.8)+32
 head(UStemp)
 ```
 
-    ##      Monthly.AverageTemp.degC Monthly.AverageTemp.Uncertainty
-    ## 186                    -3.583                           0.213
-    ## 1064                   13.906                           0.159
-    ## 1297                   20.935                           0.424
-    ## 1428                   -0.453                           0.201
-    ## 1573                    2.073                           0.124
-    ## 1802                   -1.586                           0.122
-    ##            Country       Date Monthly.AverageTemp.degF
-    ## 186  United States 1974-01-01                  25.5506
-    ## 1064 United States 1997-05-01                  57.0308
-    ## 1297 United States 1967-07-01                  69.6830
-    ## 1428 United States 1982-12-01                  31.1846
-    ## 1573 United States 1980-03-01                  35.7314
-    ## 1802 United States 2008-02-01                  29.1452
+    ##        Monthly.AverageTemp.degC Monthly.AverageTemp.Uncertainty
+    ## 110207                   -1.702                           0.206
+    ## 113557                    8.534                           0.103
+    ## 116909                    9.848                           0.201
+    ## 117050                   -2.286                           0.154
+    ## 117915                   21.690                           0.110
+    ## 118266                    2.504                           0.186
+    ##              Country       Date Monthly.AverageTemp.degF
+    ## 110207 United States 1934-12-01                  28.9364
+    ## 113557 United States 2009-10-01                  47.3612
+    ## 116909 United States 1933-10-01                  49.7264
+    ## 117050 United States 1972-02-01                  27.8852
+    ## 117915 United States 2008-07-01                  71.0420
+    ## 118266 United States 1986-11-01                  36.5072
 
 ### Q3ii.b. Calculate average land temperature by year and plot it. The original file has the average land temperature by month.
 
