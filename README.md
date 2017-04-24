@@ -47,7 +47,7 @@ The file structure should be as follows:
   
   + data <- CityTemp.csv | TEMP.csv
   
-  + paper <- CaseStudy2.Rmd | Case Study 2.docx | CaseStudy2.md | CaseStudy2.html
+  + paper <- CaseStudy2.Rmd | Case Study 2.docx | CaseStudy2.md
              
     + CaseStudy2_files
       
