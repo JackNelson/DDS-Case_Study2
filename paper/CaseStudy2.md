@@ -5,9 +5,9 @@ April 13, 2017
 
 ### Introduction
 
-In this study, using Orange tree data from R, we will investigate orange tree growth and the relationship between tree age and circumference by tree size. We will examine land temperature differences from data that contains the monthly average temperatures since 1900 by country and by city. For the top 20 countries and cities, ranked by temperature difference, we will then examine the relationship between their minimum and maximum monthly average temperatures. Finally, we will examine land temperatures by month in the United States and look for trends in the data, and will look for temperature differences by year.
+In this study, using Orange tree data from R, we will investigate orange tree growth and the relationship between tree age and circumference by tree size. We will examine land temperature differences from data that contains the monthly average temperatures since 1900 by country and by city. For the top 20 countries and cities, ranked by temperature difference, we will then examine the relationship between their minimum and maximum monthly average temperatures. Finally, we will examine land temperatures by month in the United States and look for trends in the data including temperature differences by year.
 
-#### Code used to download and tidy data
+### Code used to download and tidy data
 
 ``` r
 dir<-getwd()
@@ -18,7 +18,9 @@ source(paste(dir,"/source/cleanup_2.R",sep=""))
 source(paste(dir,"/source/CityTemp_cleanup.R",sep=""))
 ```
 
-##### The mean circumference by Tree group.
+### 2a. The built-in data set called Orange in R is about the growth of orange trees. The Orange data frame has 3 columns of records of the growth of orange trees. Calculate the mean and the median of the trunk circumferences for different size of the trees.
+
+##### The following code chunk will display the mean circumference by Tree group.
 
 ``` r
 # Calculate the mean and the median of the trunk circumferences for different size of the trees. (Tree) 
@@ -32,7 +34,9 @@ aggregate(formula=circumference~Tree,data=Orange,FUN = mean)
     ## 4    2     135.28571
     ## 5    4     139.28571
 
-##### The median circumference by Tree group.
+The trees ranked by increasing mean circumference are 3, 1, 5, 2, and 4. Their mean circumferences in mm are 94.000, 99.57143, 111.14286, 135.28571, and 139.28571.
+
+##### The following code chunk will display the median circumference by Tree group.
 
 ``` r
 aggregate(formula=circumference~Tree,data=Orange,FUN = median)
@@ -45,8 +49,11 @@ aggregate(formula=circumference~Tree,data=Orange,FUN = median)
     ## 4    2           156
     ## 5    4           167
 
-Orange Tree Circumference against Age
--------------------------------------
+The trees ranked by increasing mean circumference are 3, 1, 5, 2, and 4. Their mean circumferences in mm are 108, 115, 125, 156, and 167.
+
+### 2b. Make a scatter plot of the trunk circumferences against the age of the tree. Use different plotting symbols for different size of trees.
+
+##### The following code chunk generates a scatterplot of Orange Tree Circumference against Age separated by Tree group.
 
 ``` r
 colors<-c("blue","red","green","maroon","purple")
@@ -70,9 +77,11 @@ legend("topleft",paste("Tree grp. " ,levels(Orange$Tree)),
 
 ![](CaseStudy2_files/figure-markdown_github/Orange%20Circumference%20Against%20Age-1.png)
 
-#### At some point in the lifecycle of Tree group five (the highest maximum diameter group) the circumference dropped drammatically and the least maximum diameter group (Tree grp. 1) surpassed it greatly. Tree group five ended up being in the middle of the rank. The middle ranking group -Tree grp. 3- has the greatest circumference in the last data point.
+From the scatter plot below, we see that collectively, for all tree groups, tree circumference increases with tree age. However, looking at the data specifically by tree group, we notice that at some point in the lifecycle of Tree group five, the highest maximum diameter group, the circumference dropped drammatically and the least maximum diameter group, Tree grp. 1, surpassed it greatly.
 
-#### We see below that the groups are sequentially divided having mean diameter greater then the last group.
+### 2c. Display the trunk circumferences on a comparative boxplot against tree. Be sure you order the boxplots in the increasing order of maximum diameter.
+
+##### We see in the boxplot below that tree groups 1 through 5 are arranged in ascending order of maximum and median circumference.
 
 ``` r
 # Order the Orange data set by circumference
@@ -92,7 +101,7 @@ boxplot(OrderedOrange$circumference~OrderedOrange$Tree,data=OrderedOrange,
 
 ### 3i. Find the difference between the maximum and the minimum monthly average temperatures for each country and report/visualize top 20 countries with the maximum differences for the period since 1900.
 
-#### The following code chunk takes the Temp\_clean data frame and returns T20MinMaxTemp, the top 20 countries with the greatest temperature difference between their minimum and maximum Monthly.AvgTemp observations since 1/1/1900.
+##### The following code chunk takes the Temp\_clean data frame and returns T20MinMaxTemp, the top 20 countries with the greatest temperature difference between their minimum and maximum Monthly.AvgTemp observations since 1/1/1900.
 
 ##### The variables contained in T20MinMaxTemp are as follows:
 
@@ -146,7 +155,7 @@ MinMaxTemp <- MinMaxTemp[order(-MinMaxTemp$TempDiff), ]
 T20MinMaxTemp <- MinMaxTemp[1:20, ]
 ```
 
-#### The following code chunk takes the T20MinMaxTemp data frame and returns T20MinMaxTempLong, the long format of T20MinMaxTemp needed for plotting.
+##### The following code chunk takes the T20MinMaxTemp data frame and returns T20MinMaxTempLong, the long format of T20MinMaxTemp needed for plotting.
 
 ##### The variables contained in T20MinMaxTempLong are as follows:
 
@@ -197,7 +206,7 @@ T20MinMaxTempLong <- T20MinMaxTempLong[order(T20MinMaxTempLong$TempDiff,T20MinMa
 T20MinMaxTempLong <- transform(T20MinMaxTempLong, Country=reorder(Country, -TempDiff) )
 ```
 
-#### The following code chunk plots the T20MinMaxTemp data frame with Country in the x axis ranked by TempDiff and Monthly.AvgTemp in the y axis. The Min and Max values are plotting with labels indicating the year the observation occurred. An arrow then indicates which observation occurred first (Min prior to Max = Up; Max prior to Min = Down)
+##### The following code chunk plots the T20MinMaxTemp data frame with Country in the x axis ranked by TempDiff and Monthly.AvgTemp in the y axis. The Min and Max values are plotting with labels indicating the year the observation occurred. An arrow then indicates which observation occurred first (Min prior to Max = Up; Max prior to Min = Down)
 
 ``` r
 ggplot(T20MinMaxTempLong, aes(x=Country, y=Monthly.AvgTemp, 
@@ -216,7 +225,7 @@ ggplot(T20MinMaxTempLong, aes(x=Country, y=Monthly.AvgTemp,
 
 ![](CaseStudy2_files/figure-markdown_github/T20plot-1.png)
 
-#### The following code chunk plots the T20MinMaxTemp data frame with Year in the x axis and Monthly.AvgTemp in the y axis. The Min and Max Monthly.AvgTemp values are plotted by color.
+##### The following code chunk plots the T20MinMaxTemp data frame with Year in the x axis and Monthly.AvgTemp in the y axis. The Min and Max Monthly.AvgTemp values are plotted by color.
 
 ``` r
 ggplot(T20MinMaxTempLong, aes(x=Date, y=Monthly.AvgTemp, color=Min.Max)) + 
@@ -229,9 +238,9 @@ ggplot(T20MinMaxTempLong, aes(x=Date, y=Monthly.AvgTemp, color=Min.Max)) +
 
 ![](CaseStudy2_files/figure-markdown_github/T20scatterplot-1.png)
 
-NA
+### Q3ii.a. Select a subset of data called "UStemp" where US land temperatures from 01/01/1990 in Temp data. Use UStemp dataset to answer the followings. Create a new column to display the monthly average land temperatures in Fahrenheit (?F).
 
-#### Using the data from 1900 to 2013 for average land temperatures only in the United States, we can convert the temperatures from degrees C to degrees F using the formula Temp (deg F) = Temp (deg C)\* 1.8 +32.
+##### Using the data from 1900 to 2013 for average land temperatures only in the United States, we can convert the temperatures from degrees C to degrees F using the formula Temp (deg F) = Temp (deg C)\* 1.8 +32.
 
 ``` r
 #The following code chunk will keep only the data since 1900, subset only the data from the United States, 
@@ -247,23 +256,23 @@ head(UStemp)
 ```
 
     ##        Monthly.AverageTemp.degC Monthly.AverageTemp.Uncertainty
-    ## 110207                   -1.702                           0.206
-    ## 113557                    8.534                           0.103
-    ## 116909                    9.848                           0.201
-    ## 117050                   -2.286                           0.154
-    ## 117915                   21.690                           0.110
-    ## 118266                    2.504                           0.186
+    ## 110179                   -1.702                           0.206
+    ## 113579                    8.534                           0.103
+    ## 116877                    9.848                           0.201
+    ## 117023                   -2.286                           0.154
+    ## 117867                   21.690                           0.110
+    ## 118212                    2.504                           0.186
     ##              Country       Date Monthly.AverageTemp.degF
-    ## 110207 United States 1934-12-01                  28.9364
-    ## 113557 United States 2009-10-01                  47.3612
-    ## 116909 United States 1933-10-01                  49.7264
-    ## 117050 United States 1972-02-01                  27.8852
-    ## 117915 United States 2008-07-01                  71.0420
-    ## 118266 United States 1986-11-01                  36.5072
+    ## 110179 United States 1934-12-01                  28.9364
+    ## 113579 United States 2009-10-01                  47.3612
+    ## 116877 United States 1933-10-01                  49.7264
+    ## 117023 United States 1972-02-01                  27.8852
+    ## 117867 United States 2008-07-01                  71.0420
+    ## 118212 United States 1986-11-01                  36.5072
 
 ### Q3ii.b. Calculate average land temperature by year and plot it. The original file has the average land temperature by month.
 
-#### Calculating the average land temperature by Year and plotting it, we see a general trend up in average land temperatures in the United States between 1900 and 2013.
+##### Calculating the average land temperature by Year and plotting it, we see a general trend up in average land temperatures in the United States between 1900 and 2013.
 
 ``` r
 #The following code chunk will take the year portion of each month, summarize the temperature data 
@@ -287,7 +296,7 @@ ggplot(UStempYear, aes(x = Year, y=Temp.mean.degF))+
 
 ### Q3ii.c. Calculate the one year difference of average land temperature by year and provide the maximum difference (value) with corresponding two years.
 
-#### Calculating the one year difference of average land temperature by year, we find that the maximum absolute temperature difference is 2.5401 degrees F, and occurred between 1920 and 1921.
+##### Calculating the one year difference of average land temperature by year, we find that the maximum absolute temperature difference is 2.5401 degrees F, and occurred between 1920 and 1921.
 
 ``` r
 #The code chunk below will first sort the data, by year, in ascending order. 
@@ -306,7 +315,7 @@ UStempYear_sorta[which(UStempYear_sorta$UStempYear.delta == max(UStempYear_sorta
 
 ### 3iii. Download CityTemp data set at box.com. Find the difference between the maximum and the minimum temperatures for each major city and report/visualize top 20 cities with maximum differences for the period since 1900.
 
-#### The following code chunk takes the CityTemp\_clean data frame and returns T20MinMaxCityTemp, the top 20 cities with the greatest temperature difference between their minimum and maximum Monthly.AvgTemp observations since 1/1/1900.
+##### The following code chunk takes the CityTemp\_clean data frame and returns T20MinMaxCityTemp, the top 20 cities with the greatest temperature difference between their minimum and maximum Monthly.AvgTemp observations since 1/1/1900.
 
 ##### The variables contained in T20MinMaxCityTemp are as follows:
 
@@ -363,7 +372,7 @@ MinMaxCityTemp <- MinMaxCityTemp[order(-MinMaxCityTemp$TempDiff), ]
 T20MinMaxCityTemp <- MinMaxCityTemp[1:20, ]
 ```
 
-#### The following code chunk takes the T20MinMaxCityTemp data frame and returns T20MinMaxCityTempLong, the long format of T20MinMaxCityTemp needed for plotting.
+##### The following code chunk takes the T20MinMaxCityTemp data frame and returns T20MinMaxCityTempLong, the long format of T20MinMaxCityTemp needed for plotting.
 
 ##### The variables contained in T20MinMaxCityTempLong are as follows:
 
@@ -415,7 +424,7 @@ T20MinMaxCityTempLong <- T20MinMaxCityTempLong[order(-T20MinMaxCityTempLong$Temp
 T20MinMaxCityTempLong <- transform(T20MinMaxCityTempLong, City=reorder(City, -TempDiff) )
 ```
 
-#### The following code chunk plots the T20MinMaxCityTemp data frame with City in the x axis ranked by TempDiff and Monthly.AvgTemp in the y axis. The Min and Max values are plotting with labels indicating the year the observation occurred. An arrow then indicates which observation occurred first (Min prior to Max = Up; Max prior to Min = Down).
+##### The following code chunk plots the T20MinMaxCityTemp data frame with City in the x axis ranked by TempDiff and Monthly.AvgTemp in the y axis. The Min and Max values are plotting with labels indicating the year the observation occurred. An arrow then indicates which observation occurred first (Min prior to Max = Up; Max prior to Min = Down).
 
 ``` r
 ggplot(T20MinMaxCityTempLong, aes(x=City, y=Monthly.AvgTemp, 
@@ -433,7 +442,7 @@ ggplot(T20MinMaxCityTempLong, aes(x=City, y=Monthly.AvgTemp,
 
 ![](CaseStudy2_files/figure-markdown_github/T20Cityplot-1.png)
 
-#### The following code chunk plots the T20MinMaxCityTemp data frame with Year in the x axis and Monthly.AvgTemp in the y axis. The Min and Max Monthly Average Temperature (Monthly.AvgTemp) values are plotted by color.
+##### The following code chunk plots the T20MinMaxCityTemp data frame with Year in the x axis and Monthly.AvgTemp in the y axis. The Min and Max Monthly Average Temperature (Monthly.AvgTemp) values are plotted by color.
 
 ``` r
 ggplot(T20MinMaxCityTempLong, aes(x=Date, y=Monthly.AvgTemp, color=Min.Max)) + 
@@ -448,9 +457,8 @@ ggplot(T20MinMaxCityTempLong, aes(x=Date, y=Monthly.AvgTemp, color=Min.Max)) +
 
 ### 3iv. Compare the two graphs in (i) and (iii) and comment it.
 
-#### The initial plots have arrows indicating a minimum or maximum Monthly Average Temperature (Monthly.AvgTemp). The arrows in the plot show commonalities between the top 20 countries and top 20 cities with the highest TempDiff since 1/1/1900. Eighteen out of 20 countries and 15 out of 20 cities have their maximum Monthly Average Temperature (Monthly.AvgTemp) occurring later than the minimum Monthly Average Temperature (Monthly.AvgTemp). The scatter plot showing minimum and maximum Monthly Average Temperature (Monthly.AvgTemp) by year is even more telling. There appears to be a grouping for maximum values between 1980-present (18 out of 20 countries, 16 out of 20 cities). Without the use of advanced statistics and only using visual inspection, it appears that the Monthly Average Temperature (Monthly.AvgTemp) of the top 20 countries and cities with the highest TempDiff since 1/1/1900 has been rising in the last 40 years.
+The initial plots have arrows indicating a minimum or maximum Monthly Average Temperature (Monthly.AvgTemp). The arrows in the plot show commonalities between the top 20 countries and top 20 cities with the highest TempDiff since 1/1/1900. Eighteen out of 20 countries and 15 out of 20 cities have their maximum Monthly Average Temperature (Monthly.AvgTemp) occurring later than the minimum Monthly Average Temperature (Monthly.AvgTemp). The scatter plot showing minimum and maximum Monthly Average Temperature (Monthly.AvgTemp) by year is even more telling. There appears to be a grouping for maximum values between 1980-present (18 out of 20 countries, 16 out of 20 cities). Without the use of advanced statistics and only using visual inspection, it appears that the Monthly Average Temperature (Monthly.AvgTemp) of the top 20 countries and cities with the highest TempDiff since 1/1/1900 has been rising in the last 40 years.
 
-Conclusion
-----------
+### Conclusion
 
-In this study, we find visual evidence that further investigation is warranted to determine if monthly average temperatures have been rising since January 1900. This assertion is based on data from the top 20 countries and cities with the greatest temperature differences. Additionally, we we find that in the United States, the maximum absolute temperature difference by year is 2.5401 degrees F (1920-1921), and that there is a general trend up in average land temperature.
+In this study, Orange trees were separated into five groups and were ordered in maximum circumference. Though we saw a consistent increase in circumference with age, there were particular tree groups that decreased in circumference after a certain age. This phenomenon would suggest investigation. Furthermore, we find visual evidence that further investigation is warranted to determine if monthly average temperatures have been rising since January 1900. This assertion is based on data from the top 20 countries and cities with the greatest temperature differences. Additionally, we find that in the United States, the maximum absolute temperature difference by year is 2.5401 degrees F (1920-1921), and that there is a general trend up in yearly average land temperature.
